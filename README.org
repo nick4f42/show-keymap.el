@@ -1,0 +1,29 @@
+#+title: show-keymap.el
+#+author: Nick OBrien
+
+=show-keymap= displays keymap bindings on a textual keyboard.
+
+[[https://github.com/nick4f42/show-keymap.el/blob/screenshots/show-keymap.png?raw=true]]
+
+* Features
+
+- Use the =show-keymap= command to enter a key sequence like =C-x C-f=
+  and see bindings with the same prefix and modifiers like =C-x C-r=
+  and =C-x C-x=.
+
+- Click or press =RET= on keys to show their binding.
+
+- Click or press =RET= on modifier keys like =control= to toggle
+  showing bindings with that modifier.
+
+- Customizable keyboard layouts with the =show-keymap-keyboard= option.
+
+* Installation
+
+Using [[https://github.com/progfolio/elpaca][elpaca]] and =elpaca-use-package-mode=:
+
+#+begin_src emacs-lisp :results none
+(use-package show-keymap
+  :ensure (show-keymap :type git :host github :repo "nick4f42/show-keymap.el")
+  :bind (("C-h C-k" . show-keymap)))
+#+end_src
