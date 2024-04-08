@@ -258,8 +258,11 @@ control-modified event."
 				     ,shift-key))))))
 		    (if (setq def (show-keymap--lookup keymap shifted-keys))
 			(setq keys shifted-keys))))
-	      (when-let ((translated (keymap-lookup local-function-key-map keys)))
-		(setq keys (key-description translated)
+	      (when-let* ((bind (keymap-lookup local-function-key-map keys))
+			  ((not (keymapp bind)))
+			  (new-keys (key-description bind))
+			  ((not (string-empty-p new-keys))))
+		(setq keys new-keys
 		      def (show-keymap--lookup keymap keys))))
 	  (let* ((kmacro-p (and (fboundp 'kmacro-p)
 				(kmacro-p def)))
