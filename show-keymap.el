@@ -219,11 +219,12 @@ control-modified event."
 	show-keymap--modifiers modifiers)
   (let ((buffer-read-only nil)
 	(opoint (point))
-	(shift (memq 'shift modifiers)))
+	(shift (memq 'shift modifiers))
+	keyboard-end)
     (remove-overlays)
     (erase-buffer)
     (insert (symbol-value show-keymap-keyboard))
-    (insert "\n")
+    (setq keyboard-end (point))
 
     (goto-char (point-min))
     (when (and basic-type
@@ -328,7 +329,9 @@ control-modified event."
 		    defs)))))
 
       (setq defs (nreverse defs))
+
       (goto-char (point-max))
+      (insert "\n")
       (unless (string-empty-p prefix)
 	(insert (propertize (concat prefix "-") 'face 'help-key-binding)
 		"\n"))
@@ -345,7 +348,7 @@ control-modified event."
 		(setq doc (substring doc 0 index)))
 	      (insert "  " (propertize doc 'face 'font-lock-doc-face))))
 	  (insert "\n"))))
-    (goto-char opoint)))
+    (goto-char (min keyboard-end opoint))))
 
 (defun show-keymap--lookup (keymap &rest args)
   "Look up a key binding."
