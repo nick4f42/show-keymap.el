@@ -7,6 +7,7 @@
 ;; Homepage: https://github.com/nick4f42/show-keymap.el
 ;; Keywords: help
 ;; Package-Version: 0.1.0
+;; Package-Requires: ((emacs "29.3"))
 
 ;; This file is NOT part of GNU Emacs.
 
